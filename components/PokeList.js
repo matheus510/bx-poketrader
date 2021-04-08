@@ -37,55 +37,25 @@ const useStyles = makeStyles((theme) => ({
 
 function PokeList (props) {
 	const classes = useStyles();
-	const [anchorEl, setAnchorEl] = useState(null);
-	const handlePopoverOpen = (event) => {
-		setAnchorEl(event.currentTarget);
-	};
-	const handlePopoverClose = () => {
-		setAnchorEl(null);
-	};
-	
-	const open = Boolean(anchorEl);
-	
 	const { sides } = useContext(TraderContext);
+	
 	const renderList = (list) => {
-		console.log('render list again')
-		console.log(list)
 		return (list.map((pokemon) => {
 			const pokeId = pokemon.id;
 			const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
 			return (
 				<div key={pokeId}>
 				<ListItem
-				aria-owns={open ? 'mouse-over-popover' : undefined}
-				aria-haspopup="true"
-				onMouseEnter={handlePopoverOpen}
-				onMouseLeave={handlePopoverClose}
 				alignItems="flex-start"
 				>
 				<ListItemAvatar width="200px">
 				<Avatar alt={pokemon.name} src={img} className={classes.large}/>
 				</ListItemAvatar>
-				<ListItemText primary={pokemon.name}/>
+				<ListItemText 
+					primary={pokemon.name}
+					secondary={`Base experience: ${pokemon.base_experience}`}
+					/>
 				</ListItem>
-				<Popover
-				id="mouse-over-popover"
-				className={classes.popover}
-				open={open}
-				anchorEl={anchorEl}
-				anchorOrigin={{
-					vertical: 'bottom',
-					horizontal: 'left',
-				}}
-				transformOrigin={{
-					vertical: 'top',
-					horizontal: 'left',
-				}}
-				onClose={handlePopoverClose}
-				disableRestoreFocus
-				>
-				{props.pokeInfo ? props.pokeInfo[pokeId] : "Loading"}
-				</Popover>
 				<Divider variant="inset" component="li" />
 				</div>
 				);
@@ -95,7 +65,7 @@ function PokeList (props) {
 
 		return (
 			<List className={classes.root}>
-			{(sides ? renderList(sides[props.side]) : "")}
+				{sides ? renderList(sides[props.side]) : ""}
 			</List>
 			);
 		}

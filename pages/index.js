@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -8,60 +9,87 @@ import PokeList from '../components/PokeList';
 import PokeCompare from '../components/PokeCompare';
 import { TraderContext, TraderDefault } from '../components/context';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'Center',
+    color: theme.palette.text.primary,
+  },
+}));
+
 export default function Home() {
-  const [sides, setSides] = useState(TraderDefault.sides);
+  const classes = useStyles();
+  const [sides, setSides] = useState({ a: [], b: [] });
   const updateList = (side, list) => {
-    let newSides = sides;
-    newSides[side] = list;
-    setSides(newSides);
-    console.log("new sides", sides)
+    let newSide = { ...sides };
+    newSide[side] = list;
+    setSides({...newSide});
   }
+  
   return (
-      <Container maxWidth="false">
+    <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper>
+        <Grid item xs></Grid>
+        <Grid item xs={8}>
+          <Paper className={classes.paper}>
             <Typography variant="h4" component="h1" gutterBottom>
-              Poketrader
+            Poketrader
             </Typography>
           </Paper>
         </Grid>
-        <TraderContext.Provider value={{ ...TraderDefault, updateList }}>
-        <Grid item xs={6}>
-          <PokeSearch side="a"/>
+        <Grid item xs></Grid>
+      </Grid>
+      <TraderContext.Provider value={{ ...TraderDefault, sides, updateList }}>
+        <Grid container spacing={3}>
+          <Grid item xs>
+          </Grid>
+          <Grid item xs={3}>
+            <PokeSearch side="a"/>
+          </Grid>
+          <Grid item xs={3}>
+            <PokeSearch side="b"/> 
+          </Grid>
+          <Grid item xs>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <PokeSearch side="b"/> 
-        </Grid>
-          <Grid item xs={4}>
-            <Paper>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Side A
-            </Typography>
-              <PokeList side="a" list={sides.a}/>
+        <Grid container spacing={3}>
+          <Grid item xs={1}>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Side A
+              </Typography>
+              <PokeList side="a"/>
             </Paper>
           </Grid>
           <Grid item xs={4}>
             <PokeCompare></PokeCompare>
           </Grid>
-          <Grid item xs={4}>
-            <Paper>
+          <Grid item xs={3}>
+            <Paper className={classes.paper}>
               <Typography variant="h4" component="h1" gutterBottom>
                 Side B
               </Typography>
-              <PokeList side="b" list={sides.b}/>
+              <PokeList side="b"/>
             </Paper>
           </Grid>
-          </TraderContext.Provider>
+          <Grid item xs={1}>
+          </Grid>
         </Grid>
-      </Container>
-  )
-}
-
-export async function getStaticProps() {
+      </TraderContext.Provider>
+    </div>
+    )
+  }
   
-  return {
-    props: {
+  export async function getStaticProps() {
+    
+    return {
+      props: {
+      }
     }
   }
-}
+  
