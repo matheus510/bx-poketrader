@@ -6,7 +6,7 @@ import { PokemonList } from '../config/PokemonList';
 import { TraderContext } from './context';
 
 export default function PokeSearch({ side }) {
-    const { updateList, sides } = useContext(TraderContext);
+    const { updateList } = useContext(TraderContext);
 
     const selectPokemon = (side, value) => {
         
@@ -16,7 +16,6 @@ export default function PokeSearch({ side }) {
             return pokeInfo
         })).then(result => {
             updateList(side, result);
-            console.log("sides pós update", sides)
         })
     }
 
@@ -32,8 +31,8 @@ export default function PokeSearch({ side }) {
                 renderInput={(params) => (
                 <TextField
                     {...params}
-                    label={`Side ${side}`}
-                    placeholder="Eg: Dragonite, Pikachu..."
+                    label={`Pick pokemons for Side ${String(side).toUpperCase()}`}
+                    placeholder=""
                 />
                 )}
             />

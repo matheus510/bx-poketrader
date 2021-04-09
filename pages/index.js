@@ -60,7 +60,7 @@ export default function Home() {
           </Grid>
           <Grid item xs={3}>
             <Paper className={classes.paper}>
-              <Typography variant="h4" component="h1" gutterBottom>
+              <Typography variant="h6" gutterBottom>
                 Side A
               </Typography>
               <PokeList side="a"/>
@@ -71,7 +71,7 @@ export default function Home() {
           </Grid>
           <Grid item xs={3}>
             <Paper className={classes.paper}>
-              <Typography variant="h4" component="h1" gutterBottom>
+              <Typography variant="h6" gutterBottom>
                 Side B
               </Typography>
               <PokeList side="b"/>
