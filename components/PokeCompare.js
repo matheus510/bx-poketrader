@@ -18,16 +18,16 @@ const useStyles = makeStyles((theme) => ({
 function PokeCompare() {
   const classes = useStyles();
   const { sides, even } = useContext(TraderContext)
-  const sumBaseExp = (list) => { return list.reduce((acc, pokemon) => acc + pokemon.base_experience, 0) }
+  const sumBaseExp = (list) => list.reduce((acc, pokemon) => acc + pokemon.base_experience, 0)
   const totalBaseExperience = sides ? Object.values(sides).map(side => {
-    return side.length ? sumBaseExp(side) : 0;
-  }) : [];
+    return side.length ? sumBaseExp(side) : "";
+  }) : [0, 0];
   console.log(totalBaseExperience)
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={2}>
-          {totalBaseExperience.map((value, index) => (
+          {totalBaseExperience.map((value, index) => value ? (
             <Grid key={value} item xs={6}>
               <Paper className={classes.paper}>
                 <Typography>
@@ -36,7 +36,7 @@ function PokeCompare() {
                 </Typography>
               </Paper>
             </Grid>
-          ))}
+          ) : "")}
         </Grid>
       </Grid>
     </Grid>

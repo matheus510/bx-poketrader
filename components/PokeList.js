@@ -44,7 +44,7 @@ function PokeList (props) {
 			const pokeId = pokemon.id;
 			const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
 			return (
-				<div key={pokeId}>
+				<div key={`${props.side}${pokeId}`}>
 				<ListItem
 				alignItems="flex-start"
 				>
