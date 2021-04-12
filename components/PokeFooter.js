@@ -42,8 +42,13 @@ async function postData(url = '', data = {}) {
 function PokeFooter ({ url }) {
 	const classes = useStyles();
 	const context = useContext(TraderContext);
+    const cleanFields = () => {
+      context.updateList("a", [])
+      context.updateList("b", [])
+    }
     const saveTrade = async (url) => {
         const mapList = (side) => {
+          console.log(side)
           const list = side.map((pokemon) => {
             return {
               name: pokemon.name,
@@ -57,12 +62,19 @@ function PokeFooter ({ url }) {
             pokeList: list
           }
         }
-        const body = {
+
+        let body = {
             side_a: mapList(context.sides.a),
             side_b: mapList(context.sides.b),
-            benefited_side: context.advantage,
+            benefited_side: "even",
             even: context.even
         }
+
+        if (body.side_a.totalExp > body.side_b.totalExp)
+          body.benefited_side = "a"
+    
+        if (body.side_b.totalExp > body.side_a.totalExp)
+          body.benefited_side = "b"
         console.log(body)
         const res = await postData(url, body)
         console.log(res)
@@ -81,6 +93,18 @@ function PokeFooter ({ url }) {
                 onClick={async () => await saveTrade(url)}
               >
                 Save trade
+              </Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                className={classes.button}
+                startIcon={<SaveIcon />}
+                onClick={async () => cleanFields()}
+              >
+                Clean fields
               </Button>
             </Grid>
           </Grid>

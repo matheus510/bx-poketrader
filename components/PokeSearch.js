@@ -15,7 +15,14 @@ export default function PokeSearch({ side }) {
             const pokeInfo = P.getPokemonByName(pokemon.name);
             return pokeInfo
         })).then(result => {
-            updateList(side, result);
+            let parsedResult = result.map((pokemon) => {
+                return {
+                  name: pokemon.name,
+                  base_experience: pokemon.base_experience,
+                  id: pokemon.id
+                }
+              })
+            updateList(side, parsedResult);
         })
     }
 

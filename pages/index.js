@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+import Link from 'next/Link';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import PokeSearch from '../components/PokeSearch';
 import PokeList from '../components/PokeList';
 import PokeCompare from '../components/PokeCompare';
@@ -33,17 +34,27 @@ export default function Home(props) {
 
   const classes = useStyles();
   const [sides, setSides] = useState({ a: [], b: [] });
+  const [advantage, setAdvantage] = useState("");
   const updateList = (side, list) => {
-    let newSide = { ...sides };
-    newSide[side] = list;
-    setSides({...newSide});
+    let newSides = { ...sides };
+    newSides[side] = list;
+    setSides({...newSides});
+    const sumBaseExp = (list) => list.reduce((acc, pokemon) => acc + pokemon.base_experience, 0)
+    let newAdvantage = "even"
+    if (sumBaseExp(newSides.a) > sumBaseExp(newSides.b))
+      newAdvantage = "a"
+
+    if (sumBaseExp(newSides.b) > sumBaseExp(newSides.a))
+      newAdvantage = "b"
+
+    setAdvantage(newAdvantage);
   }
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs></Grid>
-        <Grid item xs={8}>
+        <Grid item xs={10}>
           <Paper className={classes.paper}>
             <Typography variant="h4" gutterBottom>
             Poketrader
@@ -51,8 +62,13 @@ export default function Home(props) {
             <Link
               color="textSecondary"
               href="/trades" 
+              prefetch
             >
-              Trade list
+              <Button variant="contained">
+                <Typography variant="subtitle2" gutterBottom>
+                  Trade list
+                </Typography>
+              </Button>
             </Link>
           </Paper>
         </Grid>
@@ -83,7 +99,7 @@ export default function Home(props) {
             </Paper>
           </Grid>
           <Grid item xs={4}>
-            <PokeCompare></PokeCompare>
+            <PokeCompare advantage={advantage}></PokeCompare>
           </Grid>
           <Grid item xs={3}>
             <Paper className={classes.paper}>

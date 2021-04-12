@@ -12,9 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PokeCompare() {
+function PokeCompare(props) {
   const classes = useStyles();
-  const { sides, even } = useContext(TraderContext)
+  const { sides } = useContext(TraderContext)
   const sumBaseExp = (list) => list.reduce((acc, pokemon) => acc + pokemon.base_experience, 0)
   const totalBaseExperience = sides ? Object.values(sides).map(side => {
     return side.length ? sumBaseExp(side) : "";
@@ -23,6 +23,9 @@ function PokeCompare() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
+        <Typography>
+          Advantage: { props.advantage }
+        </Typography>
         <Grid container justify="center" spacing={2}>
           {totalBaseExperience.map((value, index) => (
             <Grid key={index} item xs={6}>
