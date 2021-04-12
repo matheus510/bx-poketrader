@@ -38,7 +38,6 @@ function PokeCompare() {
       </Grid>
     </Grid>
   )
-  // return (<div>Side A:{totalBaseExperience[0]} Side B:{totalBaseExperience[1]}</div>)
 }
 
 export default PokeCompare
