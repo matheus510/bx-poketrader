@@ -95,7 +95,7 @@ function PokeFooter ({ url }) {
                 Save trade
               </Button>
             </Grid>
-            <Grid item xs={2}>
+{/*             <Grid item xs={2}>
               <Button
                 variant="contained"
                 color="primary"
@@ -106,7 +106,7 @@ function PokeFooter ({ url }) {
               >
                 Clean fields
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
 			);
 		}
