@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Link from 'next/Link';
+import Link from 'next/link';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import PokeSearch from '../components/PokeSearch';
@@ -62,7 +62,7 @@ export default function Home(props) {
             <Link
               color="textSecondary"
               href="/trades" 
-              prefetch
+              
             >
               <Button variant="contained">
                 <Typography variant="subtitle2" gutterBottom>

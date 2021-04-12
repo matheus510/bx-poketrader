@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Link from 'next/Link';
+import Link from 'next/link';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -40,7 +40,7 @@ export default function Home({ data }) {
                                 <Link
                                     color="textSecondary"
                                     href={`trades/${trade._id}/`} 
-                                    prefetch
+                                    
                                     >
                                         <Button variant="outlined">
                                             Click more details
@@ -86,7 +86,7 @@ export default function Home({ data }) {
                     <Link
                         color="textSecondary"
                         href="/" 
-                        prefetch
+                        
                         >
                         <Button variant="contained">
                             <Typography variant="subtitle2" gutterBottom>
