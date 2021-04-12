@@ -31,10 +31,10 @@ export default function Home({ data }) {
                         Trade #${trade._id} 
                     `}</li>
                         <li>{`
-                        Side A total exp: ${trade.side_a[0].totalExp}
+                        Side A total exp: ${trade.side_a.totalExp}
                     `}</li>
                         <li>{`
-                        Side B total exp: ${trade.side_b[0].totalExp}
+                        Side B total exp: ${trade.side_b.totalExp}
                     `}</li>
                         <li>{`
                         Benefited side: ${trade.benefited_side}

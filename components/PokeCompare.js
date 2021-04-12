@@ -6,9 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import { TraderContext } from '../components/context'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   paper: {
     padding: theme.spacing(2),
     color: theme.palette.text.primary,
@@ -24,11 +21,11 @@ function PokeCompare() {
   }) : [0, 0];
   console.log(totalBaseExperience)
   return (
-    <Grid container className={classes.root} spacing={2}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={2}>
-          {totalBaseExperience.map((value, index) => value ? (
-            <Grid key={value} item xs={6}>
+          {totalBaseExperience.map((value, index) => (
+            <Grid key={index} item xs={6}>
               <Paper className={classes.paper}>
                 <Typography>
                   {`Side ${index === 0 ? 'A' : 'B'} \n
@@ -36,7 +33,7 @@ function PokeCompare() {
                 </Typography>
               </Paper>
             </Grid>
-          ) : "")}
+          ))}
         </Grid>
       </Grid>
     </Grid>

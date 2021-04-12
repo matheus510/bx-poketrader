@@ -1,55 +1,34 @@
-import { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
 import PokeSearch from '../components/PokeSearch';
 import PokeList from '../components/PokeList';
 import PokeCompare from '../components/PokeCompare';
+import PokeFooter from '../components/PokeFooter';
 import { TraderContext, TraderDefault } from '../components/context';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'Center',
-    color: theme.palette.text.primary,
-  },
-}));
-
-async function postData(url = '', data = {}) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
-}
-
 export default function Home(props) {
-  const classes = useStyles();
+  useEffect(() => {
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   const [sides, setSides] = useState({ a: [], b: [] });
   const updateList = (side, list) => {
     let newSide = { ...sides };
     newSide[side] = list;
     setSides({...newSide});
   }
-  console.log(props)
-  const saveTrade = ({ baseUrl }, context) => {
-    console.log(context)
-    // postData(baseUrl, )
-  }
 
   return (
-    <div className={classes.root}>
+    <div>
       <Grid container spacing={3}>
         <Grid item xs></Grid>
         <Grid item xs={8}>
-          <Paper className={classes.paper}>
+          <Paper>
             <Typography variant="h4" component="h1" gutterBottom>
             Poketrader
             </Typography>
@@ -74,7 +53,7 @@ export default function Home(props) {
           <Grid item xs={1}>
           </Grid>
           <Grid item xs={3}>
-            <Paper className={classes.paper}>
+            <Paper>
               <Typography variant="h6" gutterBottom>
                 Side A
               </Typography>
@@ -85,7 +64,7 @@ export default function Home(props) {
             <PokeCompare></PokeCompare>
           </Grid>
           <Grid item xs={3}>
-            <Paper className={classes.paper}>
+            <Paper>
               <Typography variant="h6" gutterBottom>
                 Side B
               </Typography>
@@ -95,24 +74,7 @@ export default function Home(props) {
           <Grid item xs={1}>
           </Grid>
         </Grid>
-        <Grid container justify="center" spacing={3}>
-          <Grid item xs={1}>
-          </Grid>
-          <Grid item xs={10}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.button}
-              startIcon={<SaveIcon />}
-              onClick={saveTrade(props, context)}
-            >
-              Save trade
-            </Button>
-          </Grid>
-          <Grid item xs={1}>
-          </Grid>
-        </Grid>
+        <PokeFooter url={props.baseUrl}/>
       </TraderContext.Provider>
     </div>
     )

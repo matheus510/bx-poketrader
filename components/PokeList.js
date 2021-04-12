@@ -10,10 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TraderContext } from './context';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		maxWidth: '36ch',
-		backgroundColor: theme.palette.background.paper,
-	},
 	popover: {
 		pointerEvents: 'none',
 	},
@@ -48,7 +44,7 @@ function PokeList (props) {
 				<ListItem
 				alignItems="flex-start"
 				>
-				<ListItemAvatar width="200px">
+				<ListItemAvatar>
 				<Avatar alt={pokemon.name} src={img} className={classes.large}/>
 				</ListItemAvatar>
 				<ListItemText 
@@ -64,7 +60,7 @@ function PokeList (props) {
 		}
 
 		return (
-			<List className={classes.root}>
+			<List>
 				{sides ? renderList(sides[props.side]) : ""}
 			</List>
 			);

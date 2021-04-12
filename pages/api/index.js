@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const trades = await Trade.find({}) /* find all the data in our database */
+        const trades = await Trade.find({})
         res.status(200).json({ success: true, data: trades })
       } catch (error) {
         res.status(400).json({ success: false })
@@ -17,12 +17,11 @@ export default async function handler(req, res) {
       break
     case 'POST':
       try {
-        const trade = await Trade.create(
-          req.body
-        ) /* create a new model in the database */
+        const trade = await Trade.create(JSON.parse(req.body))
         res.status(201).json({ success: true, data: trade })
       } catch (error) {
-        res.status(400).json({ success: false })
+        debugger
+        res.status(400).json({ success: false, error: error.message })
       }
       break
     default:
