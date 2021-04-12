@@ -60,7 +60,7 @@ function PokeList (props) {
 		}
 
 		return (
-			<List>
+			<List className={classes.root}>
 				{sides ? renderList(sides[props.side]) : ""}
 			</List>
 			);

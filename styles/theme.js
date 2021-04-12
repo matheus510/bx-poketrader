@@ -4,6 +4,10 @@ import { red, blue } from '@material-ui/core/colors';
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
+    type: 'dark',
+    background: {
+      paper: red[900],
+    },
     primary: {
       main: red[900],
     },
@@ -12,9 +16,6 @@ const theme = createMuiTheme({
     },
     error: {
       main: red.A400,
-    },
-    background: {
-      default: '#fff',
     },
   },
 });

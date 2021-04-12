@@ -28,8 +28,10 @@ function PokeCompare() {
             <Grid key={index} item xs={6}>
               <Paper className={classes.paper}>
                 <Typography>
-                  {`Side ${index === 0 ? 'A' : 'B'} \n
-                  Total Base Experience ${value}`}
+                  {`Side ${index === 0 ? 'A' : 'B'}`}
+                </Typography>
+                <Typography>
+                  {`Total Experience: ${value ? value : 0}`}
                 </Typography>
               </Paper>
             </Grid>

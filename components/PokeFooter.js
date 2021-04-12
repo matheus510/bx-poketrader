@@ -5,6 +5,32 @@ import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 import { TraderContext } from './context';
 
+const useStyles = makeStyles((theme) => ({
+	root: {
+		maxWidth: '36ch',
+		backgroundColor: theme.palette.background.paper,
+	},
+	popover: {
+		pointerEvents: 'none',
+	},
+	inline: {
+		display: 'inline',
+	},
+	small: {
+		width: theme.spacing(3),
+		height: theme.spacing(3),
+	},
+	large: {
+		width: theme.spacing(7),
+		height: theme.spacing(7),
+	},
+	paper: {
+		padding: theme.spacing(2),
+		textAlign: 'center',
+    backgroundColor: theme.palette.primary,
+		color: theme.palette.text.secondary,
+	},
+}));
 async function postData(url = '', data = {}) {
     const response = await fetch(url, {
       method: 'POST', 
@@ -14,6 +40,7 @@ async function postData(url = '', data = {}) {
   }
 
 function PokeFooter ({ url }) {
+	const classes = useStyles();
 	const context = useContext(TraderContext);
     const saveTrade = async (url) => {
         const mapList = (side) => {
@@ -49,6 +76,7 @@ function PokeFooter ({ url }) {
                 variant="contained"
                 color="primary"
                 size="large"
+                className={classes.button}
                 startIcon={<SaveIcon />}
                 onClick={async () => await saveTrade(url)}
               >

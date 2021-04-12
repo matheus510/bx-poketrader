@@ -1,12 +1,27 @@
 import { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import PokeSearch from '../components/PokeSearch';
 import PokeList from '../components/PokeList';
 import PokeCompare from '../components/PokeCompare';
 import PokeFooter from '../components/PokeFooter';
 import { TraderContext, TraderDefault } from '../components/context';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.secondary,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'Center',
+    backgroundColor: theme.palette.primary,
+    color: theme.palette.text.primary,
+  },
+}));
 
 export default function Home(props) {
   useEffect(() => {
@@ -16,6 +31,7 @@ export default function Home(props) {
     }
   }, []);
 
+  const classes = useStyles();
   const [sides, setSides] = useState({ a: [], b: [] });
   const updateList = (side, list) => {
     let newSide = { ...sides };
@@ -24,14 +40,20 @@ export default function Home(props) {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs></Grid>
         <Grid item xs={8}>
-          <Paper>
-            <Typography variant="h4" component="h1" gutterBottom>
+          <Paper className={classes.paper}>
+            <Typography variant="h4" gutterBottom>
             Poketrader
             </Typography>
+            <Link
+              color="textSecondary"
+              href="/trades" 
+            >
+              Trade list
+            </Link>
           </Paper>
         </Grid>
         <Grid item xs></Grid>
@@ -53,7 +75,7 @@ export default function Home(props) {
           <Grid item xs={1}>
           </Grid>
           <Grid item xs={3}>
-            <Paper>
+            <Paper className={classes.paper}>
               <Typography variant="h6" gutterBottom>
                 Side A
               </Typography>
@@ -64,7 +86,7 @@ export default function Home(props) {
             <PokeCompare></PokeCompare>
           </Grid>
           <Grid item xs={3}>
-            <Paper>
+            <Paper className={classes.paper}>
               <Typography variant="h6" gutterBottom>
                 Side B
               </Typography>
